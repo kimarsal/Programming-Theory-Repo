@@ -2,32 +2,51 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class HandScript : Hand
+public abstract class HandScript : MonoBehaviour
 {
-    private Vector3 newPosition;
-    private float xSpeed;
-    private float ySpeed;
+    public enum HandType { Rock, Paper, Scissors };
+    protected Sprite[] handSprites = new Sprite[3];
+    private HandType type;
+    protected float xMinBounds;
+    protected float xMaxBounds;
+    protected float yMinBounds;
+    protected float yMaxBounds;
+    protected float margin = 40;
 
-    protected override void Setup()
-    {
-        BasicSetup();
-        xSpeed = Random.Range(50f, 100f);
-        ySpeed = Random.Range(50f, 100f);
-        transform.position = GetRandomSpawnPosition();
+    public HandType Type {
+        get => type;
+        set {
+            type = value;
+            gameObject.GetComponent<SpriteRenderer>().sprite = handSprites[(int)value];
+        }
     }
 
-    private Vector3 GetRandomSpawnPosition()
+    void Start()
     {
-        return new Vector3((Random.value < 0.5f ? xMinBounds - margin : xMaxBounds + margin), (Random.value < 0.5f ? yMinBounds - margin : yMaxBounds + margin), 0);
+        Setup();
     }
 
-    protected override void Move()
+    private void Update()
     {
-        transform.Translate(new Vector3(xSpeed * Time.deltaTime, ySpeed * Time.deltaTime));
-
-        if (transform.position.x < xMinBounds) xSpeed = Mathf.Abs(xSpeed);
-        else if (transform.position.x > xMaxBounds) xSpeed = -Mathf.Abs(xSpeed);
-        if (transform.position.y < yMinBounds) ySpeed = Mathf.Abs(ySpeed);
-        else if (transform.position.y > yMaxBounds) ySpeed = -Mathf.Abs(ySpeed);
+        Move();
     }
+
+    protected virtual void Setup()
+    {
+        GameObject canvas = GameObject.Find("Canvas");
+        RectTransform rect = canvas.GetComponent<RectTransform>();
+        xMinBounds = rect.position.x - rect.rect.width / 2 + margin;
+        xMaxBounds = rect.position.x + rect.rect.width / 2 - margin;
+        yMinBounds = rect.position.y - rect.rect.height / 2 + margin;
+        yMaxBounds = rect.position.y + rect.rect.height / 2 - margin;
+        transform.parent = canvas.transform;
+
+        handSprites[0] = Resources.Load<Sprite>("Rock");
+        handSprites[1] = Resources.Load<Sprite>("Paper");
+        handSprites[2] = Resources.Load<Sprite>("Scissors");
+    }
+
+    protected abstract void Move();
+
+    public abstract void LoseGame();
 }

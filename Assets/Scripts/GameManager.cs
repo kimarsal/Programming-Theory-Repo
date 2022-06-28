@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
-    public GameObject handPrefab;
+    public GameObject enemyPrefab;
     private GameObject player;
 
     // Start is called before the first frame update
@@ -12,9 +12,10 @@ public class GameManager : MonoBehaviour
     {
         player = GameObject.Find("Player");
 
-        for (int i = 0; i < 10; i++)
+        for (int i = 0; i < 12; i++)
         {
-            GameObject hand = Instantiate(handPrefab);
+            GameObject hand = Instantiate(enemyPrefab);
+            hand.GetComponent<EnemyScript>().Type = (HandScript.HandType)(i % 3);
         }
     }
 
