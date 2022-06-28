@@ -2,28 +2,16 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerScript : MonoBehaviour
+public class PlayerScript : Hand
 {
-    public GameManager.HandType handType;
-    private float xMinBounds;
-    private float xMaxBounds;
-    private float yMinBounds;
-    private float yMaxBounds;
-    private float margin = 40;
     public float speed = 100f;
 
-    void Start()
+    protected override void Setup()
     {
-        GameObject canvas = GameObject.Find("Canvas");
-        RectTransform rect = canvas.GetComponent<RectTransform>();
-        xMinBounds = rect.position.x - rect.rect.width / 2 + margin;
-        xMaxBounds = rect.position.x + rect.rect.width / 2 - margin;
-        yMinBounds = rect.position.y - rect.rect.height / 2 + margin;
-        yMaxBounds = rect.position.y + rect.rect.height / 2 - margin;
+        BasicSetup();
     }
 
-    // Update is called once per frame
-    void Update()
+    protected override void Move()
     {
         transform.Translate(Input.GetAxis("Horizontal") * speed * Time.deltaTime, Input.GetAxis("Vertical") * speed * Time.deltaTime, 0);
 
