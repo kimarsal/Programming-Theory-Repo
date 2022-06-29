@@ -2,16 +2,19 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+// INHERITANCE
 public class PlayerScript : HandScript
 {
     public float speed = 100f;
 
+    // POLYMORPHISM
     protected override void Setup()
     {
         base.Setup();
         Type = (HandType)Random.Range(0, 3);
     }
 
+    // POLYMORPHISM
     protected override void Move()
     {
         transform.Translate(Input.GetAxis("Horizontal") * speed * Time.deltaTime, Input.GetAxis("Vertical") * speed * Time.deltaTime, 0);
@@ -39,6 +42,7 @@ public class PlayerScript : HandScript
         }
     }
 
+    // POLYMORPHISM
     public override void LoseGame()
     {
         gameManager.PlayerLose(transform.position);

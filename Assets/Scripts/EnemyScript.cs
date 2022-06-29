@@ -2,12 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+// INHERITANCE
 public class EnemyScript : HandScript
 {
     private Vector3 newPosition;
     private float xSpeed;
     private float ySpeed;
 
+    // POLYMORPHISM
     protected override void Setup()
     {
         base.Setup();
@@ -21,6 +23,7 @@ public class EnemyScript : HandScript
         return new Vector3((Random.value < 0.5f ? xMinBounds - margin : xMaxBounds + margin), (Random.value < 0.5f ? yMinBounds - margin : yMaxBounds + margin), 0);
     }
 
+    // POLYMORPHISM
     protected override void Move()
     {
         transform.Translate(new Vector3(xSpeed * Time.deltaTime, ySpeed * Time.deltaTime));
@@ -31,6 +34,7 @@ public class EnemyScript : HandScript
         else if (transform.position.y > yMaxBounds) ySpeed = -Mathf.Abs(ySpeed);
     }
 
+    // POLYMORPHISM
     public override void LoseGame()
     {
         gameManager.EnemyLose(transform.position);

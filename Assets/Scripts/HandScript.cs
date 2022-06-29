@@ -13,6 +13,7 @@ public abstract class HandScript : MonoBehaviour
     protected float margin = 40;
     protected GameManager gameManager;
 
+    // ENCAPSULATION
     public HandType Type {
         get => type;
         set {
@@ -24,11 +25,13 @@ public abstract class HandScript : MonoBehaviour
 
     void Start()
     {
+        // ABSTRACTION
         Setup();
     }
 
     private void Update()
     {
+        // ABSTRACTION
         Move();
     }
 
