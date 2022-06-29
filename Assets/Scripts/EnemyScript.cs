@@ -33,7 +33,7 @@ public class EnemyScript : HandScript
 
     public override void LoseGame()
     {
-        Debug.Log("Player wins");
+        gameManager.EnemyLose(transform.position);
         Destroy(gameObject);
     }
 }

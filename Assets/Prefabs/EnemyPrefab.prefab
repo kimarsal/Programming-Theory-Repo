@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 4959034220213266498}
   - component: {fileID: 3301302159511372706}
   - component: {fileID: 3501817854760909542}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: EnemyPrefab
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -99,7 +99,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9afed733b2d4cf847a0611773ad65bfa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  handType: 0
 --- !u!54 &3301302159511372706
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -114,7 +113,7 @@ Rigidbody:
   m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 120
+  m_Constraints: 112
   m_CollisionDetection: 0
 --- !u!135 &3501817854760909542
 SphereCollider:

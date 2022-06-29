@@ -41,14 +41,14 @@ public class PlayerScript : HandScript
 
     public override void LoseGame()
     {
-        Debug.Log("Enemy wins");
+        gameManager.PlayerLose(transform.position);
         Destroy(gameObject);
     }
 
     private void ChangeType()
     {
         int type = ((int)Type + 1) % 3;
-        gameObject.GetComponent<SpriteRenderer>().sprite = handSprites[type];
+        gameObject.GetComponent<SpriteRenderer>().sprite = gameManager.handSprites[type];
         Type = (HandType)type;
     }
 }
